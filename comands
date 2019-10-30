@@ -1,0 +1,28 @@
+docker run -it --rm --network dentalcost alpine
+curl dentalcost_elasticsearch:9200/_cat/indices?v
+
+apk --update add curl
+
+curl dentalcost_elasticsearch:9200/_cat/indices?v
+curl dentalcost_dev_elasticsearch:9200/_cat/indices?v
+
+curl dentalcost_elasticsearch:9200/_search?q=scandonest
+curl dentalcost_dev_elasticsearch:9200/ejs_2288_1_1_es/_search?q=scandonest
+
+curl dentalcost_elasticsearch:9200/ejs_2288_1_1_es/_settings
+
+curl dentalcost_elasticsearch:9200/ejs_182_1_1_es/_search?q=cuña
+
+REMOVE INDEX 
+curl -XDELETE 'dentalcost_dev_elasticsearch:9200/ejs_4938_1_1_es/'
+
+https://stackoverflow.com/questions/44827673/search-with-asciifolding-and-utf-8-characters-in-elasticsearch
+
+Preselect products to index
+/modules/elasticjetsearch/src/elastic/builder/DocumentBuilder.php
+line:144 $itemsIdList = array(195,5096);
+
+To change analize encoding
+/modules/elasticjetsearch/src/elastic/builder/AnalyzerBuilder.php
+line 313  $settings['analyzer']['folding'] added
+my_ascii_folding
